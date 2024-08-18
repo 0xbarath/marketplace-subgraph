@@ -1,0 +1,76 @@
+type ListingCreated @entity(immutable: true) {
+  id: Bytes!
+  loanId: BigInt! # uint256
+  borrower: Bytes! # address
+  assetContract: Bytes! # address
+  assetTokenId: BigInt! # uint256
+  loanAmount: BigInt! # uint256
+  repayAmount: BigInt! # uint256
+  loanDuration: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LoanCreated @entity(immutable: true) {
+  id: Bytes!
+  loanId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LoanLTVDefault @entity(immutable: true) {
+  id: Bytes!
+  loanId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LoanLiquidated @entity(immutable: true) {
+  id: Bytes!
+  loanId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LoanMarketplaceCreated @entity(immutable: true) {
+  id: Bytes!
+  loanMarketplace: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LoanRepaid @entity(immutable: true) {
+  id: Bytes!
+  loanId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type LoanRepaymentDefaulted @entity(immutable: true) {
+  id: Bytes!
+  loanId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OfferCreated @entity(immutable: true) {
+  id: Bytes!
+  loanId: BigInt! # uint256
+  lender: Bytes! # address
+  borrower: Bytes! # address
+  assetContract: Bytes! # address
+  assetTokenId: BigInt! # uint256
+  loanAmount: BigInt! # uint256
+  repayAmount: BigInt! # uint256
+  loanDuration: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
