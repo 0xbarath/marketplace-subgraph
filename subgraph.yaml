@@ -5,43 +5,44 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum
-    name: Contract
+    name: LoanMarketplace
     network: holesky
     source:
       address: "0x3A307c3D74338F99dafF0df13d5083Ef7B397C45"
-      abi: Contract
-      startBlock: 0
+      abi: LoanMarketplace
+      startBlock: 2159000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - ListingCreated
-        - LoanCreated
-        - LoanLTVDefault
-        - LoanLiquidated
-        - LoanMarketplaceCreated
-        - LoanRepaid
-        - LoanRepaymentDefaulted
-        - OfferCreated
+        - Listing
+        - Offer
+        - Loan
       abis:
-        - name: Contract
-          file: ./abis/Contract.json
+        - name: LoanMarketplace
+          file: ./abis/LoanMarketplace.json
+        - name: Escrow
+          file: ./abis/Escrow.json
+        - name: Pool
+          file: ./abis/Pool.json
+        - name: ERC721
+          file: ./abis/ERC721.json
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
-        - event: ListingCreated(uint256,address,address,uint256,uint256,uint256,uint256)
+        - event: ListingCreated(uint256,address,address,uint256,uint256,uint256,uint256,uint256)
           handler: handleListingCreated
-        - event: LoanCreated(uint256)
+        - event:  OfferCreated(uint256,uint256,address,address,address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleOfferCreated
+        - event: LoanCreated(uint256,uint256)
           handler: handleLoanCreated
-        - event: LoanLTVDefault(uint256)
-          handler: handleLoanLTVDefault
-        - event: LoanLiquidated(uint256)
-          handler: handleLoanLiquidated
-        - event: LoanMarketplaceCreated(address)
-          handler: handleLoanMarketplaceCreated
         - event: LoanRepaid(uint256)
           handler: handleLoanRepaid
+        - event: LoanLTVDefault(uint256)
+          handler: handleLoanLTVDefault
         - event: LoanRepaymentDefaulted(uint256)
           handler: handleLoanRepaymentDefaulted
-        - event: OfferCreated(uint256,address,address,address,uint256,uint256,uint256,uint256)
-          handler: handleOfferCreated
-      file: ./src/contract.ts
+        - event: LoanLiquidated(uint256)
+          handler: handleLoanLiquidated
+      file: ./src/loanMarketplace.ts
